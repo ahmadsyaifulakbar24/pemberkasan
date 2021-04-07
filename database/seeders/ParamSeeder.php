@@ -17,7 +17,7 @@ class ParamSeeder extends Seeder
         DB::table('params')->insert([
             'parent_id' => NULL,
             'category_param' => 'status_project',
-            'param' => 'survey',
+            'param' => 'New Project',
             'order' => 1,
             'active' => true,
         ]);
@@ -25,7 +25,7 @@ class ParamSeeder extends Seeder
         DB::table('params')->insert([
             'parent_id' => NULL,
             'category_param' => 'status_project',
-            'param' => 'Pekerjaan Fisik',
+            'param' => 'survey',
             'order' => 2,
             'active' => true,
         ]);
@@ -33,7 +33,7 @@ class ParamSeeder extends Seeder
         DB::table('params')->insert([
             'parent_id' => NULL,
             'category_param' => 'status_project',
-            'param' => 'Terminasi',
+            'param' => 'Pekerjaan Fisik',
             'order' => 3,
             'active' => true,
         ]);
@@ -41,7 +41,7 @@ class ParamSeeder extends Seeder
         DB::table('params')->insert([
             'parent_id' => NULL,
             'category_param' => 'status_project',
-            'param' => 'Jumper/ Labeling/ Valins',
+            'param' => 'Terminasi',
             'order' => 4,
             'active' => true,
         ]);
@@ -49,7 +49,7 @@ class ParamSeeder extends Seeder
         DB::table('params')->insert([
             'parent_id' => NULL,
             'category_param' => 'status_project',
-            'param' => 'Valid 4',
+            'param' => 'Jumper/ Labeling/ Valins',
             'order' => 5,
             'active' => true,
         ]);
@@ -57,7 +57,7 @@ class ParamSeeder extends Seeder
         DB::table('params')->insert([
             'parent_id' => NULL,
             'category_param' => 'status_project',
-            'param' => 'Golive',
+            'param' => 'Valid 4',
             'order' => 6,
             'active' => true,
         ]);
@@ -65,8 +65,16 @@ class ParamSeeder extends Seeder
         DB::table('params')->insert([
             'parent_id' => NULL,
             'category_param' => 'status_project',
-            'param' => 'Omzetting',
+            'param' => 'Golive',
             'order' => 7,
+            'active' => true,
+        ]);
+
+        DB::table('params')->insert([
+            'parent_id' => NULL,
+            'category_param' => 'status_project',
+            'param' => 'Omzetting',
+            'order' => 8,
             'active' => true,
         ]);
 
