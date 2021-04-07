@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class InternetNumber extends Model
 {
     use HasFactory;
+
+    protected $table = 'internet_numbers';
+    protected $fillable = [
+        'omzetting_id',
+        'internet_number',
+    ];
 }
