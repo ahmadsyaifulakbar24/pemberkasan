@@ -15,6 +15,9 @@ class CreateOmzettingsTable extends Migration
     {
         Schema::create('omzettings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('id_valins');
+            $table->string('label_odp');
             $table->timestamps();
         });
     }

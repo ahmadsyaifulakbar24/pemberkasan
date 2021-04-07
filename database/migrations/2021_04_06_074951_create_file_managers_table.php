@@ -15,6 +15,11 @@ class CreateFileManagersTable extends Migration
     {
         Schema::create('file_managers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('status_project_id');
+            $table->foreignId('type_file_id')->nullable();
+            $table->string('file_path');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

@@ -15,6 +15,8 @@ class CreateInternetNumbersTable extends Migration
     {
         Schema::create('internet_numbers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('omzetting_id')->constrained('omzettings')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('internet_number');
             $table->timestamps();
         });
     }
