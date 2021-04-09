@@ -13,6 +13,16 @@ class Omzetting extends Model
     protected $fillable = [
         'project_id',
         'id_valins',
-        'lable_odp',
+        'label_odp',
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
+
+    public function internet_number()
+    {
+        return $this->hasMany(InternetNumber::class, 'omzetting_id');
+    }
 }

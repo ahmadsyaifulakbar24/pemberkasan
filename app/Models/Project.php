@@ -33,6 +33,11 @@ class Project extends Model
         return $this->hasMany(HistoryProject::class, 'project_id');
     }
 
+    public function omzetting()
+    {
+        return $this->hasMany(Omzetting::class, 'project_id');
+    }
+
     public function type()
     {
         return $this->belongsTo(Param::class, 'type_id');

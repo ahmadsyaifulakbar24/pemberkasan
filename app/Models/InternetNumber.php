@@ -14,4 +14,9 @@ class InternetNumber extends Model
         'omzetting_id',
         'internet_number',
     ];
+
+    public function omzetting()
+    {
+        return $this->belongsTo(Omzetting::class, 'omzetting_id');
+    }
 }
