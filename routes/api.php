@@ -4,6 +4,10 @@ use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Auth\LogoutController;
 use App\Http\Controllers\API\Auth\ResetPasswordController;
 use App\Http\Controllers\API\FileManager\CreateFileManagerController;
+use App\Http\Controllers\API\FileManager\DeleteFileManagerController;
+use App\Http\Controllers\API\FileManager\GetFileManagerController;
+use App\Http\Controllers\API\FileManager\UpdateFileManagerController;
+use App\Http\Controllers\API\HistoryProject\GetHistoryProjectController;
 use App\Http\Controllers\API\Omzetting\CreateOmzettingController;
 use App\Http\Controllers\API\Omzetting\DeleteOmzettingController;
 use App\Http\Controllers\API\Omzetting\GetOmzettingController;
@@ -43,7 +47,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('status_project', [GetParamController::class, 'status_project']);
         Route::get('type_project', [GetParamController::class, 'type_project']);
     });
-    
+
     Route::prefix('project')->group(function () {
         Route::get('{project_id?}', GetProjectController::class);
         Route::post('create', CreateProjectController::class);
@@ -60,7 +64,14 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('file_manager')->group(function () {
+        Route::get('{project:id}', GetFileManagerController::class);
         Route::post('{project:id}/create', CreateFileManagerController::class);
+        Route::post('{file_manager:id}/update', UpdateFileManagerController::class);
+        Route::delete('{file_manager:id}/delete', DeleteFileManagerController::class);
+    });
+
+    Route::prefix('history_project')->group(function () {
+        Route::get('{project:id}', GetHistoryProjectController::class);
     });
 });
 

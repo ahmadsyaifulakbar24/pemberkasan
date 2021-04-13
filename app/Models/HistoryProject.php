@@ -20,4 +20,9 @@ class HistoryProject extends Model
     {
         return $this->belongsTo(Project::class, 'project_id');
     }
+
+    public function status_project()
+    {
+        return $this->belongsTo(Param::class, 'status_id');
+    }
 }

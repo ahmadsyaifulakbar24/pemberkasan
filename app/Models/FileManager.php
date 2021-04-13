@@ -13,10 +13,15 @@ class FileManager extends Model
     protected $fillable = [
         'project_id',
         'status_project_id',
-        'type_file_id',
+        'type_file',
         'file_name',
         'file_path',
         'keterangan'
     ];
     
+
+    public function status_project()
+    {
+        return $this->belongsTo(Param::class, 'status_project_id');
+    }
 }

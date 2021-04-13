@@ -28,4 +28,14 @@ class Param extends Model
     {
         return $this->hasMany(Project::class, 'status_id');
     }
+
+    public function file_manager_status_project()
+    {
+        return $this->hasMany(FileManager::class, 'status_project_id');
+    }
+
+    public function history_project_status_project()
+    {
+        return $this->hasMany(HistoryProject::class, 'status_id');
+    }
 }
