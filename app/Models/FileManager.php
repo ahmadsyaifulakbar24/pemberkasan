@@ -14,6 +14,7 @@ class FileManager extends Model
         'project_id',
         'status_project_id',
         'type_file_id',
+        'file_name',
         'file_path',
         'keterangan'
     ];

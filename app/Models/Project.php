@@ -47,4 +47,9 @@ class Project extends Model
     {
         return $this->belongsTo(Param::class, 'status_id');
     }
+
+    public function file_manager()
+    {
+        return $this->hasMany(FileManager::class, 'project_id');
+    }
 }
