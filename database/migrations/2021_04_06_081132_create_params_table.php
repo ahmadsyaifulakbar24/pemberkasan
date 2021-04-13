@@ -29,7 +29,6 @@ class CreateParamsTable extends Migration
 
         Schema::table('file_managers', function (Blueprint $table) {
             $table->foreign('status_project_id')->references('id')->on('params')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('type_file_id')->references('id')->on('params')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

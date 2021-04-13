@@ -4,6 +4,9 @@ use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Auth\LogoutController;
 use App\Http\Controllers\API\Auth\ResetPasswordController;
 use App\Http\Controllers\API\Omzetting\CreateOmzettingController;
+use App\Http\Controllers\API\Omzetting\DeleteOmzettingController;
+use App\Http\Controllers\API\Omzetting\GetOmzettingController;
+use App\Http\Controllers\API\Omzetting\UpdateOmzettingController;
 use App\Http\Controllers\API\Project\AcceptStatusProjectController;
 use App\Http\Controllers\API\Project\CreateProjectController;
 use App\Http\Controllers\API\Project\DeleteProjectController;
@@ -43,7 +46,10 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('omzetting')->group(function () {
+        Route::get('{project:id}', GetOmzettingController::class);
         Route::post('{project:id}/create', CreateOmzettingController::class);
+        Route::patch('{omzetting:id}/update', UpdateOmzettingController::class);
+        Route::delete('{omzetting:id}/delete', DeleteOmzettingController::class);
     });
 });
 
