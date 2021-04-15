@@ -20,6 +20,7 @@ class HistoryProjectResource extends JsonResource
             'project_id' => $this->project_id,
             'user_id' => $this->user_id,
             'status_project' => new StatusProjectResource($this->status_project),
+            'type' => $this->type,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

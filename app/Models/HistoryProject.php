@@ -13,7 +13,8 @@ class HistoryProject extends Model
     protected $fillable = [
         'project_id',
         'user_id',
-        'status_id'
+        'status_id',
+        'type',
     ];
 
     public function project()

@@ -18,6 +18,7 @@ class CreateHistoryProjectsTable extends Migration
             $table->foreignId('project_id')->constrained('projects')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('user_id')->constrained('users')->onDetele('cascade')->onUpdate('cascade');
             $table->foreignId('status_id')->constrained('params')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('type');
             $table->timestamps();
         });
     }

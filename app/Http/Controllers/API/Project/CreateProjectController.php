@@ -23,13 +23,15 @@ class CreateProjectController extends Controller
                 }),
             ],
         ]);
-
+        
+        $status_id = ($request->type_id == 11) ? 15 : 1;
         $requestProject = $request->all();
-        $requestProject['status_id'] = 1;
+        $requestProject['status_id'] = $status_id;
         $project = Project::create($requestProject);
 
         $historyProject['user_id'] = $request->user()->id;
         $historyProject['status_id'] = $project->status_id;
+        $historyProject['type'] = 'create';
         $project->history_project()->create($historyProject);
 
         return ResponseFormatter::success(

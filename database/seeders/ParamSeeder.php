@@ -82,7 +82,7 @@ class ParamSeeder extends Seeder
             'parent_id' => NULL,
             'category_param' => 'status_project',
             'param' => 'Selesai',
-            'order' => 1,
+            'order' => 9,
             'active' => true,
         ]);
 
@@ -123,6 +123,22 @@ class ParamSeeder extends Seeder
             'category_param' => 'type_project',
             'param' => 'PPJAB',
             'order' => 5,
+            'active' => true,
+        ]);
+
+        DB::table('params')->insert([
+            'parent_id' => NULL,
+            'category_param' => 'gamas_status',
+            'param' => 'Open',
+            'order' => 1,
+            'active' => true,
+        ]);
+
+        DB::table('params')->insert([
+            'parent_id' => NULL,
+            'category_param' => 'gamas_status',
+            'param' => 'Close',
+            'order' => 2,
             'active' => true,
         ]);
     }

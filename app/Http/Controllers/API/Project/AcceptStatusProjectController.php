@@ -15,32 +15,62 @@ class AcceptStatusProjectController extends Controller
     public function __invoke(Request $request, Project $project)
     {
         try {
-            $project->history_project()->create([
-                'user_id' => $request->user()->id,
-                'status_id' => $project->status_id,
-            ]);
-    
-            $next_status_order = $project->status->order + 1;
-            $next_status_project = Param::where([['category_param', 'status_project'], ['order', $next_status_order]])->first();
-            if(!$next_status_project) {
-                return ResponseFormatter::error([
-                    'message' => 'last status in project'
-                ], 'accept status project failde', 400);
+            $type_id = $project->type_id;
+            if($type_id == 11) {
+                return $project = $this->close_project($request, $project);
+            } else {
+                $project->history_project()->create([
+                    'user_id' => $request->user()->id,
+                    'status_id' => $project->status_id,
+                    'type' => 'finish',
+                ]);
+
+                if($type_id == 12 || $type_id == 13 || $type_id == 14) {
+                    $next_status_order = ($project->status_id == 7) ? 9 : $project->status->order + 1;
+                } else {
+                    $next_status_order = $project->status->order + 1;
+                }
+                $next_status_project = Param::where([['category_param', 'status_project'], ['order', $next_status_order]])->first();
+                if(!$next_status_project) {
+                    return ResponseFormatter::error([
+                        'message' => 'last status in project'
+                    ], 'accept status project failde', 400);
+                }
+                $project->update([ 'status_id' => $next_status_project->id ]);
             }
-    
-            $project->update([
-                'status_id' => $next_status_project->id
-            ]);
-    
+
             return ResponseFormatter::success(
                 new ProjectResource(Project::find($project->id)),
                 'success accept status project'
             );
+
         } catch (Exception $e) {
             return ResponseFormatter::error([
                 'message' => 'someting went wrong',
                 'error' => $e->getMessage(),
             ], 'accept status project failde', 500);
         }
+    }
+
+    private function close_project($request, $project) 
+    {
+        if($project->status_id == 16) {
+            return ResponseFormatter::error([
+                'message' => 'project status is closed',
+            ], 'accept status project failde', 400);
+        }
+
+        $project->update([ 'status_id' => 16 ]);
+
+        $project->history_project()->create([
+            'user_id' => $request->user()->id,
+            'status_id' => 16,
+            'type' => 'finish',
+        ]);
+
+        return ResponseFormatter::success(
+            new ProjectResource(Project::find($project->id)),
+            'success close status project'
+        );
     }
 }
