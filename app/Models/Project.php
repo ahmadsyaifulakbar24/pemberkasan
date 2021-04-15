@@ -52,4 +52,9 @@ class Project extends Model
     {
         return $this->hasMany(FileManager::class, 'project_id');
     }
+
+    public function team_project()
+    {
+        return $this->belongsToMany(User::class, 'team_projects', 'project_id', 'team_id');
+    }
 }

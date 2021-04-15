@@ -60,4 +60,19 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function parent_user_team_project()
+    {
+        return $this->hasMany(TeamProject::class, 'parent_user_id');
+    }
+
+    public function project()
+    {
+        return $this->belongsToMany(Project::class, 'team_projects', 'team_id', 'project_id');
+    }
+
+    public function user_role()
+    {
+        return $this->belongsTo(UserRole::class, 'role_id');
+    }
 }

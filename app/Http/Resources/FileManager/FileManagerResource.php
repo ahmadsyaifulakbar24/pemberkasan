@@ -23,6 +23,7 @@ class FileManagerResource extends JsonResource
             'file_name' => $this->file_name,
             'keterangan' => $this->keterangan,
             'file_path' => $this->file_path,
+            'file_url' => $this->file_url,
         ];
     }
 }

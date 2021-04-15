@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Auth;
 
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class ResetPasswordController extends Controller
                 'password' => Hash::make($request->password)
             ]);
             return ResponseFormatter::success(
-                $user, 
+                new UserResource($user),
                 'successfuly changed the password'
             );
         } catch (Exception $e) {

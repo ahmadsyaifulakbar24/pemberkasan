@@ -18,6 +18,9 @@ use App\Http\Controllers\API\Project\CreateProjectController;
 use App\Http\Controllers\API\Project\DeleteProjectController;
 use App\Http\Controllers\API\Project\GetProjectController;
 use App\Http\Controllers\API\Project\UpdateProjectController;
+use App\Http\Controllers\API\TeamProject\CreateTeamProjectController;
+use App\Http\Controllers\API\TeamProject\GetTeamProjectController;
+use App\Http\Controllers\API\User\GetUserController;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +46,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', LogoutController::class);
     Route::post('reset_password', ResetPasswordController::class);
 
+    Route::prefix('user')->group(function () {
+        Route::get('search', [GetUserController::class, 'search']);
+    });
     Route::prefix('param')->group(function () {
         Route::get('status_project', [GetParamController::class, 'status_project']);
         Route::get('type_project', [GetParamController::class, 'type_project']);
@@ -72,6 +78,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('history_project')->group(function () {
         Route::get('{project:id}', GetHistoryProjectController::class);
+    });
+
+    Route::prefix('team_project')->group(function () {
+        Route::get('{project:id}', [GetTeamProjectController::class, 'team_project']);
+        Route::post('{project:id}/create', CreateTeamProjectController::class);
     });
 });
 
