@@ -24,7 +24,7 @@ class CreateFileManagerController extends Controller
             'type_file' => ['nullable', 'in:after,before'],
             'file_name' => ['required', 'string'],
             'keterangan' => ['nullable', 'string'],
-            'file' => ['required', 'mimes:pdf,xlx,xls,jpg,png,jpeg']
+            'file' => ['required', 'mimes:pdf,xlsx,xls,doc,docx,jpg,png,jpeg']
         ]);
 
         $inputFile = $request->all();
