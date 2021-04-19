@@ -13,7 +13,14 @@ use Illuminate\Validation\Rule;
 
 class GetFileManagerController extends Controller
 {
-    public function __invoke(Request $request, Project $project)
+    public function get(FileManager $file_manager) 
+    {
+        return ResponseFormatter::success(
+            FileManagerResource::collection($file_manager),
+            'succes get file'
+        );
+    }
+    public function by_project(Request $request, Project $project)
     {
         $this->validate($request, [
             'status_project_id' => [
