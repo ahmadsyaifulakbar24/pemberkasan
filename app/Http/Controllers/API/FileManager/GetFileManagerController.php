@@ -16,7 +16,7 @@ class GetFileManagerController extends Controller
     public function get(FileManager $file_manager) 
     {
         return ResponseFormatter::success(
-            FileManagerResource::collection($file_manager),
+            new FileManagerResource($file_manager),
             'succes get file'
         );
     }
