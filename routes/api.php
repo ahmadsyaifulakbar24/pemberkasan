@@ -63,7 +63,8 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('omzetting')->group(function () {
-        Route::get('{project:id}', GetOmzettingController::class);
+        Route::get('{omzetting:id}/get', [GetOmzettingController::class, 'get']);
+        Route::get('{project:id}/by_project', [GetOmzettingController::class, 'by_project']);
         Route::post('{project:id}/create', CreateOmzettingController::class);
         Route::patch('{omzetting:id}/update', UpdateOmzettingController::class);
         Route::delete('{omzetting:id}/delete', DeleteOmzettingController::class);
