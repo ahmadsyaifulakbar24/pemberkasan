@@ -18,7 +18,7 @@ class GetOmzettingController extends Controller
         );
     }
 
-    public function by_id(Project $project)
+    public function by_project(Project $project)
     {
         return ResponseFormatter::success(
             OmzettingResource::collection($project->omzetting),
