@@ -18,13 +18,13 @@ class UpdateFileManagerController extends Controller
             'status_project_id' => [
                 'required',
                 Rule::exists('params', 'id')->where(function ($query) {
-                    return $query->where('category_param', 'status_project');
+                    return $query->where('category_param', 'status_project')->orWhere('category_param', 'gamas_status');
                 })
             ],
             'type_file' => ['nullable', 'in:after,before'],
             'file_name' => ['required', 'string'],
             'keterangan' => ['nullable', 'string'],
-            'file' => ['nullable', 'mimes:pdf,xlx,xls,jpg,png,jpeg']
+            'file' => ['nullable', 'mimes:pdf,xlsx,xls,doc,docx,jpg,png,jpeg']
         ]);
 
         $inputFile = $request->all();

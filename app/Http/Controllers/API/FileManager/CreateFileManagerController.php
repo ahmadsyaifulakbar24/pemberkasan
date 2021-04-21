@@ -18,7 +18,7 @@ class CreateFileManagerController extends Controller
             'status_project_id' => [
                 'required',
                 Rule::exists('params', 'id')->where(function ($query) {
-                    return $query->where('category_param', 'status_project');
+                    return $query->where('category_param', 'status_project')->orWhere('category_param', 'gamas_status');
                 })
             ],
             'type_file' => ['nullable', 'in:after,before'],
