@@ -15,9 +15,10 @@ class OmzettingResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'project_id' => $this->project_id,
             'id_valins' => $this->id_valins,
-            'label_odp' => $this->lable_odp,
+            'label_odp' => $this->label_odp,
             'internet_number' => $this->internet_number,
         ];
     }
