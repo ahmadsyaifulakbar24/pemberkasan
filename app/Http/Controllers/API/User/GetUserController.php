@@ -20,9 +20,11 @@ class GetUserController extends Controller
         $search = $request->search;
         $user = User::query();
         if($request->user_role){
-            $user->where('role_id', $request->user_role);
+            $user->where([['role_id', $request->user_role], ['name', 'like', '%'.$search.'%']])->orWhere([['role_id', $request->user_role], ['username', 'like', '%'.$search.'%']]);
+        } else {
+            $user->where('name', 'like', '%'.$search.'%')->orWhere('username', 'like', '%'.$search.'%');
         }
-        $user->where('name', 'like', '%'.$search.'%')->orWhere('username', 'like', '%'.$search.'%')->limit(9);
+        $user->limit(9);
         return ResponseFormatter::success(
             UserResource::collection($user->get()),
             'success get user data'
