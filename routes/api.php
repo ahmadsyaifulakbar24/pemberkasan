@@ -56,7 +56,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('project')->group(function () {
-        Route::get('{project_id?}/get', [GetProjectController::class, 'get']);
+        Route::get('get/{project_id?}', [GetProjectController::class, 'get']);
         Route::get('/get_by_leader', [GetProjectController::class, 'by_leader']);
         Route::post('create', CreateProjectController::class);
         Route::patch('{project:id}/update/', UpdateProjectController::class);
