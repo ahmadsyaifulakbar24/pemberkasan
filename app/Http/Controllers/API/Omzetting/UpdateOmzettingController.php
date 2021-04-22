@@ -19,6 +19,11 @@ class UpdateOmzettingController extends Controller
             'label_odp' => ['required', 'string']
         ]);
 
+        $omzetting->update([
+            'id_valins' => $request->id_valins,
+            'label_odp' => $request->label_odp,
+        ]);
+        
         $internet_number = $request->omzetting;
         $old_internet_number = $omzetting->internet_number()->pluck('internet_number','id')->toArray();
         

@@ -49,13 +49,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('search', [GetUserController::class, 'search']);
     });
+
     Route::prefix('param')->group(function () {
         Route::get('status_project', [GetParamController::class, 'status_project']);
         Route::get('type_project', [GetParamController::class, 'type_project']);
     });
 
     Route::prefix('project')->group(function () {
-        Route::get('{project_id?}', GetProjectController::class);
+        Route::get('{project_id?}/get', [GetProjectController::class, 'get']);
+        Route::get('/get_by_leader', [GetProjectController::class, 'by_leader']);
         Route::post('create', CreateProjectController::class);
         Route::patch('{project:id}/update/', UpdateProjectController::class);
         Route::patch('{project:id}/accept_status/', AcceptStatusProjectController::class);
