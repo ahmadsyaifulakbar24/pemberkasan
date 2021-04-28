@@ -17,15 +17,6 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="type_id" class="col-lg-4 col-sm-5 col-form-label text-secondary">Tipe Project</label>
-							<div class="col-lg-8 col-sm-7">
-								<select class="custom-select" id="type_id" role="button">
-									<option disabled selected>Pilih</option>
-								</select>
-								<div class="invalid-feedback" id="type_id-feedback"></div>
-							</div>
-						</div>
-						<div class="form-group row">
 							<label for="keterangan" class="col-lg-4 col-sm-5 col-form-label text-secondary">Keterangan</label>
 							<div class="col-lg-8 col-sm-7">
 								<textarea class="form-control form-control-sm" id="keterangan" rows="3"></textarea>

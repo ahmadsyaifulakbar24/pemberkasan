@@ -1,42 +1,22 @@
-function get_project() {
-    $.ajax({
-        url: api_url + 'project/get/' + id,
-        type: 'GET',
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('token'))
-        },
-        success: function (result) {
-            let value = result.data
-            // console.log(value)
-            $('#name').val(value.name)
-            $('#type_id').val(value.type.id)
-            $('#keterangan').val(value.keterangan)
-
-            $('#data').show()
-            $('#loading').remove()
-        },
-        error: function (xhr) {
-            if (xhr.responseJSON.message == "Trying to get property 'id' of non-object") {
-                window.history.back()
-            }
-        }
-    })
-}
-
 $.ajax({
-    url: api_url + 'param/type_project',
+    url: api_url + 'project/get/' + id,
     type: 'GET',
     beforeSend: function (xhr) {
         xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('token'))
     },
     success: function (result) {
-        // console.log(result)
-        let append
-        $.each(result.data, function (index, value) {
-            append = `<option value="${value.id}">${value.type_project}</option>`
-            $('#type_id').append(append)
-        })
-        get_project()
+        let value = result.data
+        // console.log(value)
+        $('#name').val(value.name)
+        $('#keterangan').val(value.keterangan)
+
+        $('#data').show()
+        $('#loading').remove()
+    },
+    error: function (xhr) {
+        if (xhr.responseJSON.message == "Trying to get property 'id' of non-object") {
+            window.history.back()
+        }
     }
 })
 
@@ -50,7 +30,6 @@ $('#form').submit(function (e) {
         type: 'PATCH',
         data: {
             name: $('#name').val(),
-            type_id: $('#type_id').val(),
             keterangan: $('#keterangan').val()
         },
         beforeSend: function (xhr) {
@@ -72,10 +51,6 @@ $('#form').submit(function (e) {
             if (err.name) {
                 $('#name').addClass('is-invalid')
                 $('#name-feedback').html('Masukkan nama project')
-            }
-            if (err.type_id) {
-                $('#type_id').addClass('is-invalid')
-                $('#type_id-feedback').html('Pilih tipe project')
             }
             if (err.keterangan) {
                 $('#keterangan').addClass('is-invalid')
