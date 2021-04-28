@@ -16,19 +16,7 @@ class UpdateProjectController extends Controller
         $this->validate($request, [
             'name' => ['required', 'string'],
             'keterangan' => ['required', 'string'],
-            'type_id' => [
-                'required',
-                Rule::exists('params', 'id')->where(function ($query) {
-                    return $query->where('category_param', 'type_project');
-                }),
-            ],
         ]);
-
-        if($project->status->order != 1) {
-            return ResponseFormatter::error([
-                'message' => "can't update this project"
-            ], 'update project failed', 400);
-        }
 
         $inputProject = $request->all();
         $project->update($inputProject);
