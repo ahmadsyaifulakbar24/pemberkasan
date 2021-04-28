@@ -1,0 +1,2 @@
+$('#empty').show()
+$('#loading').hide()
