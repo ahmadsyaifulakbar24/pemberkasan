@@ -14,7 +14,8 @@ class FileManager extends Model
     protected $fillable = [
         'project_id',
         'status_project_id',
-        'type_file',
+        'file_status',
+        'file_type',
         'file_name',
         'file_path',
         'keterangan'

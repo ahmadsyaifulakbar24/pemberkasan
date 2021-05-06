@@ -26,7 +26,7 @@ class AcceptStatusProjectController extends Controller
                 ]);
 
                 if($type_id == 12 || $type_id == 13 || $type_id == 14) {
-                    $next_status_order = ($project->status_id == 7) ? 9 : $project->status->order + 1;
+                    $next_status_order = ($project->status_id == 6) ? 8 : $project->status->order + 1;
                 } else {
                     $next_status_order = $project->status->order + 1;
                 }
@@ -34,7 +34,7 @@ class AcceptStatusProjectController extends Controller
                 if(!$next_status_project) {
                     return ResponseFormatter::error([
                         'message' => 'last status in project'
-                    ], 'accept status project failde', 400);
+                    ], 'accept status project failed', 400);
                 }
                 $project->update([ 'status_id' => $next_status_project->id ]);
             }
@@ -48,23 +48,21 @@ class AcceptStatusProjectController extends Controller
             return ResponseFormatter::error([
                 'message' => 'someting went wrong',
                 'error' => $e->getMessage(),
-            ], 'accept status project failde', 500);
+            ], 'accept status project failed', 500);
         }
     }
 
     private function close_project($request, $project) 
     {
-        if($project->status_id == 16) {
+        if($project->status_id == 9) {
             return ResponseFormatter::error([
                 'message' => 'project status is closed',
-            ], 'accept status project failde', 400);
+            ], 'accept status project failed', 400);
         }
-
-        $project->update([ 'status_id' => 16 ]);
-
+        $project->update([ 'status_id' => 9 ]);
         $project->history_project()->create([
             'user_id' => $request->user()->id,
-            'status_id' => 16,
+            'status_id' => 9,
             'type' => 'finish',
         ]);
 

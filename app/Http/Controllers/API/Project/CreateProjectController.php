@@ -24,7 +24,7 @@ class CreateProjectController extends Controller
             ],
         ]);
         
-        $status_id = ($request->type_id == 11) ? 15 : 1;
+        $status_id = ($request->type_id == 11) ? 8 : 1;
         $requestProject = $request->all();
         $requestProject['status_id'] = $status_id;
         $project = Project::create($requestProject);

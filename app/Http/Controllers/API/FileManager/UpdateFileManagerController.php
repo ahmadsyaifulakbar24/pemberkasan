@@ -21,7 +21,6 @@ class UpdateFileManagerController extends Controller
                     return $query->where('category_param', 'status_project')->orWhere('category_param', 'gamas_status');
                 })
             ],
-            'type_file' => ['nullable', 'in:after,before'],
             'file_name' => ['required', 'string'],
             'keterangan' => ['nullable', 'string'],
             'file' => ['nullable', 'mimes:pdf,xlsx,xls,doc,docx,jpg,png,jpeg']
