@@ -22,9 +22,10 @@ class CreateFileManagerController extends Controller
                     return $query->where('category_param', 'status_project')->orWhere('category_param', 'gamas_status');
                 })
             ],
+            'hidden' => ['nullable', 'in:true,false'],
             'file_name' => ['required', 'string'],
             'keterangan' => ['nullable', 'string'],
-            'file' => ['required', 'mimes:pdf,xlsx,xls,doc,docx,jpeg,png,jpg,gif,svg']
+            'file' => ['required']
         ]);
 
         $inputFile = $request->all();
@@ -34,6 +35,7 @@ class CreateFileManagerController extends Controller
                 $file_name = Str::random(40).'.'.$extention;
                 $path = FileHelpers::upload_image_resize($request->file('file'), $file_name);
                 $inputFile['file_type'] = 'image';
+                $inputFile['hidden'] = false;
             } else {
                 $path = $request->file('file')->store('file_manager', 'public');
                 $inputFile['file_type'] = 'document';

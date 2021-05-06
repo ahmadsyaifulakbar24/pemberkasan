@@ -22,6 +22,7 @@ class FileManagerResource extends JsonResource
             'file_status' => $this->file_status,
             'file_type' => $this->file_type,
             'file_name' => $this->file_name,
+            'hidden' => $this->hidden,
             'keterangan' => $this->keterangan,
             'file_url' => $this->file_url,
         ];
