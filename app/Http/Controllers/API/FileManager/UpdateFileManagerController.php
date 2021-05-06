@@ -28,7 +28,7 @@ class UpdateFileManagerController extends Controller
 
         $inputFile = $request->all();
         if($request->file('file')) {
-            $inputFile['file_name'] = $request->file_name.'.'.$request->file('file')->extension();
+            $inputFile['file_name'] = $request->file_name;
             $path = $request->file('file')->store('file_manager', 'public');
             $inputFile['file_path'] = $path;
             Storage::disk('public')->delete($file_manager->file_path);

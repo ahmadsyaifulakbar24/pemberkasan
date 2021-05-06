@@ -40,7 +40,7 @@ class CreateFileManagerController extends Controller
                 $path = $request->file('file')->store('file_manager', 'public');
                 $inputFile['file_type'] = 'document';
             }
-            $inputFile['file_name'] = $request->file_name.'.'.$request->file('file')->extension();
+            $inputFile['file_name'] = $request->file_name;
             $inputFile['file_path'] = $path;
         }
 

@@ -18,7 +18,7 @@ class CreateFileManagersTable extends Migration
             $table->foreignId('project_id')->constrained('projects')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('status_project_id');
             $table->enum('file_status',['after','before'])->nullable();
-            $table->boolean('hidden');
+            $table->boolean('hidden')->default(0)->change();
             $table->string('file_type');
             $table->string('file_name')->nullable();
             $table->string('file_path');
