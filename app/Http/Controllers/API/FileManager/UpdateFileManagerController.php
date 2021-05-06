@@ -6,6 +6,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FileManager\FileManagerResource;
 use App\Models\FileManager;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -26,18 +27,24 @@ class UpdateFileManagerController extends Controller
             'file' => ['nullable']
         ]);
 
-        $inputFile = $request->all();
-        if($request->file('file')) {
-            $inputFile['file_name'] = $request->file_name;
-            $path = $request->file('file')->store('file_manager', 'public');
-            $inputFile['file_path'] = $path;
-            Storage::disk('public')->delete($file_manager->file_path);
+        try {
+            $inputFile = $request->all();
+            if($request->file('file')) {
+                $inputFile['file_name'] = $request->file_name;
+                $path = $request->file('file')->store('file_manager', 'public');
+                $inputFile['file_path'] = $path;
+                Storage::disk('public')->delete($file_manager->file_path);
+            }
+    
+            $file_manager->update($inputFile);
+            return ResponseFormatter::success(
+                new FileManagerResource($file_manager),
+                'success edit file'
+            );
+        } catch (Exception $e) {
+            return ResponseFormatter::error([
+                'message' => $e->getMessage()
+            ], 'success edit file', 500);
         }
-
-        $file_manager->update($inputFile);
-        return ResponseFormatter::success(
-            new FileManagerResource($file_manager),
-            'success edit file'
-        );
     }
 }

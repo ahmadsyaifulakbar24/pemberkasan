@@ -7,6 +7,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FileManager\FileManagerResource;
 use App\Models\Project;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
@@ -28,26 +29,32 @@ class CreateFileManagerController extends Controller
             'file' => ['required']
         ]);
 
-        $inputFile = $request->all();
-        if($request->file('file')) {
-            $extention = $request->file('file')->extension();
-            if($extention == 'jpeg' || $extention == 'png' || $extention == 'jpg' || $extention == 'giv' || $extention == 'svg') {
-                $file_name = Str::random(40).'.'.$extention;
-                $path = FileHelpers::upload_image_resize($request->file('file'), $file_name);
-                $inputFile['file_type'] = 'image';
-                $inputFile['hidden'] = false;
-            } else {
-                $path = $request->file('file')->store('file_manager', 'public');
-                $inputFile['file_type'] = 'document';
+        try {
+            $inputFile = $request->all();
+            if($request->file('file')) {
+                $extention = $request->file('file')->extension();
+                if($extention == 'jpeg' || $extention == 'png' || $extention == 'jpg' || $extention == 'giv' || $extention == 'svg') {
+                    $file_name = Str::random(40).'.'.$extention;
+                    $path = FileHelpers::upload_image_resize($request->file('file'), $file_name);
+                    $inputFile['file_type'] = 'image';
+                    $inputFile['hidden'] = false;
+                } else {
+                    $path = $request->file('file')->store('file_manager', 'public');
+                    $inputFile['file_type'] = 'document';
+                }
+                $inputFile['file_name'] = $request->file_name;
+                $inputFile['file_path'] = $path;
             }
-            $inputFile['file_name'] = $request->file_name;
-            $inputFile['file_path'] = $path;
+    
+            $file_manager = $project->file_manager()->create($inputFile);
+            return ResponseFormatter::success(
+                new FileManagerResource($file_manager),
+                'success upload file'
+            );
+        } catch (Exception $e) {
+            return ResponseFormatter::error([
+                'message' => $e->getMessage()
+            ], 'success edit file', 500);
         }
-
-        $file_manager = $project->file_manager()->create($inputFile);
-        return ResponseFormatter::success(
-            new FileManagerResource($file_manager),
-            'success upload file'
-        );
     }
 }
