@@ -26,7 +26,7 @@ class CreateFileManagerController extends Controller
             'hidden' => ['nullable', 'in:true,false'],
             'file_name' => ['required', 'string'],
             'keterangan' => ['nullable', 'string'],
-            'file' => ['required']
+            'file' => ['required', 'file'],
         ]);
 
         try {
