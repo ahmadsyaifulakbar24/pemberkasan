@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\FileManager\FileManagerResource;
 use App\Models\FileManager;
 use App\Models\Project;
-use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
