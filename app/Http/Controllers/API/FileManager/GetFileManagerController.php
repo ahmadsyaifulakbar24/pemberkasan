@@ -41,4 +41,20 @@ class GetFileManagerController extends Controller
             'succes get all file'
         );
     }
+
+    public function image_by_project(Request $request, Project $project)
+    {
+        $this->validate($request, [
+            'file_status' => ['nullable', 'in:after,before']
+        ]);
+        $file_manager = FileManager::query();
+        if($request->file_status) {
+            $file_manager->where('file_status', $request->file_status);
+        }
+        $file_manager->where([['project_id', $project->id], ['file_type', 'image']]);
+        return ResponseFormatter::success(
+            FileManagerResource::collection($file_manager->get()),
+            'success get image file manager'
+        );
+    }
 }

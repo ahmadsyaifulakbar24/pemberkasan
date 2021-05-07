@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
 
 class UpdateFileManagerController extends Controller
 {
-    public function __invoke(Request $request, FileManager $file_manager)
+    public function update(Request $request, FileManager $file_manager)
     {
         $this->validate($request, [
             'status_project_id' => [
@@ -46,5 +46,30 @@ class UpdateFileManagerController extends Controller
                 'message' => $e->getMessage()
             ], 'success edit file', 500);
         }
+    }
+
+    public function image_mapping(Request $request) 
+    {
+        $this->validate($request, [
+            'image_mapping' => ['required', 'array'],
+            'image_mapping.*.file_manager_id' => ['required', 'exists:file_managers,id'],
+            'image_mapping.*.file_status' => ['required', 'in:after,before'],
+        ]);
+
+        
+        foreach ($request->image_mapping as $image_mapping) {
+            $file_manager = FileManager::find($image_mapping['file_manager_id']);
+            if($file_manager) {
+                $update_file = [ 'file_status' => $image_mapping['file_status'] ];
+                $file_manager->update($update_file);
+            }
+            $file_manager_id[] = $image_mapping['file_manager_id'];
+        }
+        $result = FileManager::whereIn('id', $file_manager_id)->get();
+        return ResponseFormatter::success(
+            FileManagerResource::collection($result),
+            'success update file status in file manager'
+        );
+
     }
 }
