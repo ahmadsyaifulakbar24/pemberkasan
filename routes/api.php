@@ -78,7 +78,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('{project:id}/by_project', [GetFileManagerController::class, 'by_project']);
         Route::post('{project:id}/create', CreateFileManagerController::class);
         Route::post('{file_manager:id}/update', [UpdateFileManagerController::class, 'update']);
-        Route::post('image_mapping', [UpdateFileManagerController::class, 'image_mapping']);
+        Route::post('{project:id}/image_mapping', [UpdateFileManagerController::class, 'image_mapping']);
         Route::delete('{file_manager:id}/delete', DeleteFileManagerController::class);
     });
 

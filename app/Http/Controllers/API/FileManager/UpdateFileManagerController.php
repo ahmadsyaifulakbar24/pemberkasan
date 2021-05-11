@@ -6,6 +6,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FileManager\FileManagerResource;
 use App\Models\FileManager;
+use App\Models\Project;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -48,7 +49,7 @@ class UpdateFileManagerController extends Controller
         }
     }
 
-    public function image_mapping(Request $request) 
+    public function image_mapping(Request $request, Project $project) 
     {
         $this->validate($request, [
             'image_mapping' => ['required', 'array'],
@@ -56,7 +57,7 @@ class UpdateFileManagerController extends Controller
             'image_mapping.*.file_status' => ['required', 'in:after,before'],
         ]);
 
-        
+        $project->file_manager()->update([ 'file_status' => NULL ]);
         foreach ($request->image_mapping as $image_mapping) {
             $file_manager = FileManager::find($image_mapping['file_manager_id']);
             if($file_manager) {
