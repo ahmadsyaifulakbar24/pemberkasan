@@ -1,5 +1,6 @@
 if (localStorage.getItem('name')) $('.name').html(localStorage.getItem('name'))
 if (localStorage.getItem('photo')) $('.avatar').attr('src', localStorage.getItem('photo'))
+const token = localStorage.getItem('token')
 const user = localStorage.getItem('user')
 const role = localStorage.getItem('role')
 
@@ -45,15 +46,15 @@ $('.password').click(function () {
 
 function logout() {
     $.ajax({
-        url: api_url + 'logout',
+        url: `${api_url}logout`,
         type: 'POST',
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('token'))
+            xhr.setRequestHeader("Authorization", "Bearer " + token)
         },
         success: function () {
             localStorage.clear()
             $.ajax({
-                url: root + 'session/logout',
+                url: `${root}session/logout`,
                 type: 'GET',
                 success: function () {
                     location.href = root
@@ -85,12 +86,12 @@ function customAlert(status, param) {
     $('.customAlert').html(icon + param)
     $('.customAlert').addClass('active')
     $('.customAlert').animate({ bottom: "+=120px" }, 150)
-    if (status != 'warning') {
+    // if (status != 'warning') {
         setTimeout(function () {
             $('.customAlert').removeClass('active')
             $('.customAlert').animate({ bottom: "-=120px" }, 150)
         }, 2500)
-    }
+    // }
 }
 
 function tanggal(date) {
@@ -219,20 +220,39 @@ function delay(fn, ms) {
     }
 }
 
-function status_project(param) {
+function status_project_name(param) {
     switch (param) {
-        case 1: return 'mdi-file-document-box-outline'
-        case 2: return 'mdi-file-document-box-check-outline'
-        case 3: return 'mdi-briefcase-outline'
-        case 4: return 'mdi-location-exit'
-        case 5: return 'mdi-qrcode-scan'
-        case 6: return 'mdi-map-check-outline'
-        case 7: return 'mdi-checkbox-marked-circle-outline'
-        case 8: return 'mdi-chart-line'
-        case 9: return 'mdi-check-all'
+    	case 1: return 'Survey'
+    	case 2: return 'Pekerjaan Fisik'
+    	case 3: return 'Terminasi'
+    	case 4: return 'Jumper/ Labeling/ Valins'
+    	case 5: return 'Valid 4'
+    	case 6: return 'Golive'
+    	case 7: return 'Omzetting'
+    	case 15: return 'Mapping'
+    }
+}
+
+function status_project_icon(param) {
+    switch (param) {
+        case 1: return 'mdi-file-document-box-check-outline'
+        case 2: return 'mdi-briefcase-outline'
+        case 3: return 'mdi-location-exit'
+        case 4: return 'mdi-qrcode-scan'
+        case 5: return 'mdi-map-check-outline'
+        case 6: return 'mdi-checkbox-marked-circle-outline'
+        case 7: return 'mdi-chart-line'
+        case 8: return 'mdi-image-filter'
         case 15: return 'mdi-check-circle-outline'
         case 16: return 'mdi-close-circle-outline'
     }
+}
+
+function hidden_project(param) {
+	switch (param) {
+		case 0: return 'Tidak'
+		case 1: return 'Ya'
+	}
 }
 
 function role_project(param) {
@@ -249,6 +269,8 @@ function history_project(param, status) {
     switch (param) {
         case 'create': return 'Membuat Project'
         case 'finish': return 'Selesai ' + status
+        case 'Open': return 'Membuat Project'
+        case 'Close': return 'Selesai'
     }
 }
 

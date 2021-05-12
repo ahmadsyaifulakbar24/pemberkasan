@@ -20,44 +20,39 @@ function get_data(page) {
             xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('token'))
         },
         success: function (result) {
-            // console.log(result)
             $('#table').html('')
             $('#loading').hide()
             if (result.data.length > 0) {
                 $('#data').show()
-                let append, link, accept, trash
+                let append, link, trash
                 let from = result.meta.from
                 $.each(result.data, function (index, value) {
+		            // console.log(value)
                     if (value.type.type_project == 'Gamas') {
                         link = `${root}project/gamas/${value.id}/${value.status.id}`
                     } else {
-                        if (value.type.id != 10) {
-                            if (value.status.id == 9) {
-                                link = `${root}project/${value.id}/7`
-                            } else {
-                                link = `${root}project/${value.id}/${value.status.id}`
-                            }
-                        } else {
-                            if (value.status.id == 9) {
-                                link = `${root}project/${value.id}/8`
-                            } else {
-                                link = `${root}project/${value.id}/${value.status.id}`
-                            }
-                        }
+                        link = `${root}project/${value.id}/${value.status.id}`
+                        // if (value.type.id != 10) {
+                        //     if (value.status.id == 9) {
+                        //         link = `${root}project/${value.id}/7`
+                        //     } else {
+                        //         link = `${root}project/${value.id}/${value.status.id}`
+                        //     }
+                        // } else {
+                        //     if (value.status.id == 9) {
+                        //         link = `${root}project/${value.id}/8`
+                        //     } else {
+                        //         link = `${root}project/${value.id}/${value.status.id}`
+                        //     }
+                        // }
                     }
                     if (role == 1 || role == 100 || role == 201) {
-                        if (value.status.id != 9 && value.status.id != 16) {
-                            accept = `<div class="btn btn-sm btn-primary accept">Selesai</div>`
-                        } else {
-                            accept = ``
-                        }
-                        if (value.status.id == 1 || value.status.id == 15) {
+                        if (value.status.id == 1 || value.status.id == 8) {
                             trash = `<i class="mdi mdi-trash mdi-trash-can-outline mdi-18px pr-0 trash" role="button"></i>`
                         } else {
                             trash = ``
                         }
                     } else {
-                        accept = ``
                         trash = ``
                         $('.compose').remove()
                     }
@@ -68,7 +63,6 @@ function get_data(page) {
 						<td>${value.keterangan}</td>
 						<td class="text-truncate" id="status${value.id}">${value.status.status_project}</td>
 		        		<td class="text-truncate"><a href="${root}project/team/${value.id}" class="btn btn-sm btn-outline-primary">Team Project</a></td>
-		        		<td class="text-truncate" id="accept${value.id}">${accept}</td>
 						<td id="trash${value.id}">${trash}</td>
 					</tr>`
                     $('#table').append(append)
@@ -86,57 +80,6 @@ function get_data(page) {
         }
     })
 }
-
-$(document).on('click', '.accept', function () {
-    let id = $(this).closest('tr').data('id')
-    $('#accept').data('id', id)
-})
-
-$('#accept').click(function () {
-    let id = $('#accept').data('id')
-    $.ajax({
-        url: api_url + 'project/' + id + '/accept_status',
-        type: 'PATCH',
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('token'))
-        },
-        success: function (result) {
-            // console.log(result)
-            let value = result.data
-            let link
-            if (value.type.type_project == 'Gamas') {
-                link = `${root}project/gamas/${value.id}/${value.status.id}`
-            } else {
-                if (value.type.id != 10) {
-                    if (value.status.id == 9) {
-                        link = `${root}project/${value.id}/7`
-                    } else {
-                        link = `${root}project/${value.id}/${value.status.id}`
-                    }
-                } else {
-                    if (value.status.id == 9) {
-                        link = `${root}project/${value.id}/8`
-                    } else {
-                        link = `${root}project/${value.id}/${value.status.id}`
-                    }
-                }
-            }
-            $('#name' + id).html(`<a href="${link}">${value.name}</a>`)
-            $('#status' + id).html(value.status.status_project)
-            $('#modal-accept').modal('hide')
-            if (value.status.id == 9 || value.status.id == 16) {
-                $('#accept' + id).empty()
-            }
-            $('#trash' + id).empty()
-        }
-    })
-})
-
-$(document).on('click', '.accept', function () {
-    $('#modal-accept').modal('show')
-    let name = $(this).closest('tr').data('name')
-    $('.project').html(name)
-})
 
 $(document).on('click', '.trash', function () {
     $('#modal-delete').modal('show')

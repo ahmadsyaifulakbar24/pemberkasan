@@ -1,44 +1,26 @@
 @extends('layouts/app')
 
-@section('title','Upload Dokumen')
+@section('title','Edit Foto')
 
 @section('content')
 	<div class="container">
 		<div class="row">
 			<div class="col-xl-8 col-lg-10 offset-xl-2 offset-lg-1">
-				<h5 class="pb-2">Upload Dokumen</h5>
+				<h5 class="pb-2">Edit Foto</h5>
 				<div class="card card-custom none" id="card">
 					<form id="form" class="card-body">
-						<div class="form-group row">
-							<label for="file_name" class="col-lg-4 col-sm-5 col-form-label text-secondary">Nama File</label>
-							<div class="col-lg-8 col-sm-7">
-								<input class="form-control" id="file_name">
-								<div class="invalid-feedback" id="file_name-feedback"></div>
-							</div>
-						</div>
 						<div class="form-group form-file row">
 							<label for="file" class="col-lg-4 col-sm-5 col-form-label text-secondary">File</label>
 							<div id="form-file" class="col-lg-8 col-md-7">
-								<div class="file-group">
+								<div class="file-group none">
 									<div class="custom-file">
-										<input type="file" class="custom-file-input" id="file" role="button">
+										<input type="file" class="custom-file-input" id="file" role="button" accept="image/*">
 										<label class="custom-file-label">Pilih File</label>
 										<div id="file-feedback" class="invalid-feedback"></div>
 									</div>
 								</div>
 							</div>
 							<div class="invalid-feedback" id="file-feedback"></div>
-						</div>
-						<div class="form-group row">
-							<label for="type_file" class="col-lg-4 col-sm-5 col-form-label text-secondary">Tipe File</label>
-							<div class="col-lg-8 col-sm-7">
-								<select class="custom-select" id="type_file" role="button">
-									<option selected>Kosong</option>
-									<option value="before">Before</option>
-									<option value="after">After</option>
-								</select>
-								<div class="invalid-feedback" id="type_file-feedback"></div>
-							</div>
 						</div>
 						<div class="form-group row">
 							<label for="keterangan" class="col-lg-4 col-sm-5 col-form-label text-secondary">Keterangan</label>
@@ -50,10 +32,7 @@
 						<div class="row">
 							<div class="offset-lg-4 offset-md-5 col-lg-8 col-md-7 mt-3">
 								<div class="form-group">
-									<!-- <div class="btn btn-md btn-block btn-outline-primary position-relative" id="item">
-										<i class="position-absolute mdi mdi-plus mdi-18px" style="left:10px;top:5px"></i>Tambah
-									</div> -->
-									<button class="btn btn-block btn-primary px-3" id="submit">Upload Dokumen</button>
+									<button class="btn btn-block btn-primary px-3" id="submit">Simpan</button>
 								</div>
 							</div>
 						</div>
@@ -75,7 +54,6 @@
 
 @section('script')
 	<script>const id = {{$id}}</script>
-	<script>const status_id = {{$status_id}}</script>
 	<script src="{{asset('assets/js/file.js')}}"></script>
-	<script src="{{asset('api/upload.js')}}"></script>
+	<script src="{{asset('api/edit-document.js')}}"></script>
 @endsection

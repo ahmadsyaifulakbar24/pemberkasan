@@ -28,7 +28,6 @@
 								<th class="text-truncate">Status</th>
 								<th class="text-truncate"></th>
 								<th class="text-truncate"></th>
-								<th class="text-truncate"></th>
 							</tr>
 						</thead>
 						<tbody id="table"></tbody>
@@ -70,8 +69,7 @@
 		<div class="none" id="empty">
 			<div class="d-flex flex-column justify-content-center align-items-center state">
 				<i class="mdi mdi-clipboard-outline mdi-48px pr-0"></i>
-				<h5>Belum ada Project</h5>
-				<p class="text-secondary">Buat Project untuk membuat Project baru</p>
+				<h5>Belum ada project</h5>
 			</div>
 		</div>
 		<div id="loading">

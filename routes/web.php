@@ -22,6 +22,9 @@ Route::group(['middleware'=>['beforeMiddleware']], function () {
     Route::get('osp', function () {
         return view('osp');
     });
+    Route::get('project/team/{id}', function ($id) {
+        return view('team', compact('id'));
+    });
     
     Route::group(['middleware'=>['managerMiddleware']], function () {
         Route::get('create/project', function () {
@@ -29,36 +32,46 @@ Route::group(['middleware'=>['beforeMiddleware']], function () {
         });
         Route::get('project/{id}', function ($id) {
             return view('edit-project', compact('id'));
-        })->where(['id' => '[0-9]+']);
+        });
 	});
 
     Route::get('project/{id}/{status_id}', function ($id, $status_id) {
         return view('view-project', compact('id', 'status_id'));
-    })->where(['id' => '[0-9]+', 'status_id' => '[0-9]+']);
-    
+    });
     Route::get('project/gamas/{id}/{status_id}', function ($id, $status_id) {
         return view('view-gamas', compact('id', 'status_id'));
-    })->where(['id' => '[0-9]+', 'status_id' => '[0-9]+']);
-
-    Route::group(['middleware'=>['leaderMiddleware']], function () {
-        Route::get('upload/{id}/{status_id}', function ($id, $status_id) {
-        return view('upload', compact('id', 'status_id'));
-        })->where(['id' => '[0-9]+', 'status_id' => '[0-9]+']);
-        
-        Route::get('upload/omzetting/{id}', function ($id) {
-            return view('upload-omzetting', compact('id'));
-        })->where(['id' => '[0-9]+']);
     });
 
-    Route::get('dokumen/{id}/', function ($id) {
+    Route::group(['middleware'=>['leaderMiddleware']], function () {
+        Route::get('upload/photo/{id}/{status_id}', function ($id, $status_id) {
+	        return view('upload-photo', compact('id', 'status_id'));
+        });
+        Route::get('upload/document/{id}/{status_id}', function ($id, $status_id) {
+	        return view('upload-document', compact('id', 'status_id'));
+        });
+        Route::get('upload/golive/{id}/{status_id}', function ($id, $status_id) {
+	        return view('upload-golive', compact('id', 'status_id'));
+        });
+        Route::get('upload/omzetting/{id}', function ($id) {
+            return view('upload-omzetting', compact('id'));
+        });
+
+	    Route::get('edit/photo/{id}', function ($id) {
+	        return view('edit-photo', compact('id'));
+	    });
+	    Route::get('edit/document/{id}', function ($id) {
+	        return view('edit-document', compact('id'));
+	    });
+	    Route::get('edit/golive/{id}', function ($id) {
+	        return view('edit-golive', compact('id'));
+	    });
+    });
+
+    Route::get('dokumen/{id}', function ($id) {
         return view('dokumen', compact('id'));
-    })->where(['id' => '[0-9]+']);
-    
+    });
+
     Route::get('omzetting/{id}', function ($id) {
         return view('omzetting', compact('id'));
-    })->where(['id' => '[0-9]+']);
-    
-    Route::get('project/team/{id}', function ($id) {
-        return view('team', compact('id'));
-    })->where(['id' => '[0-9]+']);
+    });
 });

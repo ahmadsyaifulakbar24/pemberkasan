@@ -96,7 +96,7 @@ $('#form').submit(function (e) {
             },
             success: function (result) {
                 // console.log(result)
-                location.href = `${root}project/${id}/8`
+                location.href = `${root}project/${id}/7`
             }
         })
     }

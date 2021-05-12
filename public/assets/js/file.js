@@ -1,8 +1,10 @@
 let file = null
+let file_name = null
 
 $(document).on('change', 'input[type="file"]', function(e) {
     let val = $(this).get(0).files[0]
     let ext = val.name.split('.').pop()
+    file_name = val.name
     if (val.size <= 2000000) {
         file = val
         addStagingFile(val.name, ext)

@@ -39,9 +39,9 @@ $('#form').submit(function (e) {
             let value = result.data
             // console.log(value)
             if (value.type.id != 11) {
-                location.href = `${root}project/${value.id}/1`
+                location.href = `${root}project/${value.id}/${value.status.id}`
             } else {
-                location.href = `${root}project/gamas/${value.id}/15`
+                location.href = `${root}project/gamas/${value.id}/${value.status.id}`
             }
         },
         error: function (xhr) {

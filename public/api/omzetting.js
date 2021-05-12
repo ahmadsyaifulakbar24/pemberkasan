@@ -101,7 +101,7 @@ $('#form').submit(function (e) {
             },
             success: function (result) {
                 let value = result.data
-                location.href = `${root}project/${value.project_id}/8`
+                location.href = `${root}project/${value.project_id}/7`
             }
         })
     }

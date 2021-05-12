@@ -30,8 +30,7 @@
 		<div class="none" id="empty">
 			<div class="d-flex flex-column justify-content-center align-items-center state">
 				<i class="mdi mdi-account-group-outline mdi-48px pr-0"></i>
-				<h5>Belum ada Team Project</h5>
-				<p class="text-secondary">Tambah Leader untuk menambah Leader baru</p>
+				<h5>Belum ada team project</h5>
 			</div>
 		</div>
 		<div id="loading">
