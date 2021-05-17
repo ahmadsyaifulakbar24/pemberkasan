@@ -5,15 +5,15 @@ $(document).on('change', 'input[type="file"]', function(e) {
     let val = $(this).get(0).files[0]
     let ext = val.name.split('.').pop()
     file_name = val.name
-    if (val.size <= 2000000) {
+    // if (val.size <= 2000000) {
         file = val
         addStagingFile(val.name, ext)
         $(this).parents('.file-group').hide()
         $(this).removeClass('is-invalid')
-    } else {
-        $(this).addClass('is-invalid')
-        $(this).siblings('.invalid-feedback').html('Ukuran file maksimal 2MB.')
-    }
+    // } else {
+    //     $(this).addClass('is-invalid')
+    //     $(this).siblings('.invalid-feedback').html('Ukuran file maksimal 2MB.')
+    // }
 })
 
 function addStagingFile(name, type) {

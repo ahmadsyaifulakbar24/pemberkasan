@@ -61,7 +61,7 @@ function get_data(page) {
 						<td class="text-truncate" id="name${value.id}"><a href="${link}">${value.name}</a></td>
 						<td class="text-truncate">${value.type.type_project}</td>
 						<td>${value.keterangan}</td>
-						<td class="text-truncate" id="status${value.id}">${value.status.status_project}</td>
+						<td class="text-truncate text-capitalize" id="status${value.id}">${value.status.status_project}</td>
 		        		<td class="text-truncate"><a href="${root}project/team/${value.id}" class="btn btn-sm btn-outline-primary">Team Project</a></td>
 						<td id="trash${value.id}">${trash}</td>
 					</tr>`

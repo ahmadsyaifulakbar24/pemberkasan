@@ -188,7 +188,7 @@
 						<i class="mdi mdi-close mdi-18px pr-0"></i>
 					</div>
 				</div>
-				<div class="modal-body py-0">Anda yakin ingin selesaikan <b id="project"></b>?</div>
+				<div class="modal-body py-0">Anda yakin ingin selesaikan <b class="text-capitalize" id="project"></b>?</div>
 				<div class="modal-footer border-top-0">
 					<div class="btn btn-sm btn-link" data-dismiss="modal">Batal</div>
 					<button class="btn btn-sm btn-primary" id="accept">Selesai</button>
