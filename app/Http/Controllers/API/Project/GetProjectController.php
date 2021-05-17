@@ -38,7 +38,7 @@ class GetProjectController extends Controller
             'limit' => ['nullable', 'numeric'],
          ]);
 
-        $team_project = TeamProject::where('team_id', $request->user_leader_id)->pluck('id');
+        $team_project = TeamProject::where('team_id', $request->user_leader_id)->pluck('project_id');
 
         $limit = $request->input('limit', 15);
         $project = Project::whereIn('id', $team_project)->paginate($limit);
