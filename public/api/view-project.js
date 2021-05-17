@@ -66,7 +66,7 @@ if (status_id == 1) {
     }
 }
 
-let project
+let project, statusid
 
 $.ajax({
     url: `${api_url}project/get/${id}`,
@@ -78,6 +78,7 @@ $.ajax({
         let value = result.data
         // console.log(value)
         project = value.name
+        statusid = value.status.id
         $('.project').html(value.name)
         $('#project').html(value.status.status_project)
         $('#btn-edit').attr('href', `${root}project/${value.id}`)
@@ -100,8 +101,13 @@ $.ajax({
         for (let i = 1; i <= 8; i++) {
             status = i == 8 ? 15 : i
             status_id == status ? active = 'active' : active = 'text-secondary'
+            if (statusid >= status) {
+            	link = `${root}project/${id}/${status}`
+            } else {
+            	link = 'javascript:void(0)'
+            }
             append = `<li class="nav-item">
-		        <a href="${root}project/${id}/${status}" class="nav-link d-flex align-items-center ${active}" role="button">
+		        <a href="${link}" class="nav-link d-flex align-items-center ${active}" role="button">
 		            <i class="mdi ${status_project_icon(i)} mdi-18px"></i>
 		            <span>${status_project_name(parseInt(status))}</span>
 		        </a>
